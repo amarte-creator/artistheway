@@ -7,22 +7,23 @@ import { ProductCard } from "@/components/product-card"
 import { ProductFilters } from "@/components/product-filters"
 import { products } from "@/lib/products"
 
-export default function ShopPage() {
+export default function PaintingsPage() {
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedArtist, setSelectedArtist] = useState("all")
   const [selectedPriceRange, setSelectedPriceRange] = useState("all")
 
+  // Filter to only show painting products
+  const paintingProducts = useMemo(() => {
+    return products.filter((product) => product.category === "paintings")
+  }, [])
+
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
+    return paintingProducts.filter((product) => {
       // Search filter
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase())
-
-      // Category filter
-      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
 
       // Artist filter
       const matchesArtist = selectedArtist === "all" || product.artist === selectedArtist
@@ -38,13 +39,12 @@ export default function ShopPage() {
         }
       }
 
-      return matchesSearch && matchesCategory && matchesArtist && matchesPrice
+      return matchesSearch && matchesArtist && matchesPrice
     })
-  }, [searchQuery, selectedCategory, selectedArtist, selectedPriceRange])
+  }, [paintingProducts, searchQuery, selectedArtist, selectedPriceRange])
 
   const handleClearFilters = () => {
     setSearchQuery("")
-    setSelectedCategory("all")
     setSelectedArtist("all")
     setSelectedPriceRange("all")
   }
@@ -56,30 +56,31 @@ export default function ShopPage() {
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="text-center space-y-4 mb-12">
-              <h1 className="font-serif text-3xl md:text-4xl font-bold text-slate-800">All Art Collection</h1>
+              <h1 className="font-serif text-3xl md:text-4xl font-bold text-slate-800">Paintings Collection</h1>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                Discover authentic paintings and photography from Tarija, Bolivia. Each piece captures the soul of our 
-                ancestors and the timeless beauty of Chapaco culture.
+                Explore our curated collection of original paintings that celebrate the beauty and culture of Tarija. 
+                Each piece is a unique expression of our artists' connection to the land and traditions of the Chapaco people.
               </p>
             </div>
 
             <div className="mb-8">
               <ProductFilters
                 searchQuery={searchQuery}
-                selectedCategory={selectedCategory}
+                selectedCategory="paintings"
                 selectedArtist={selectedArtist}
                 selectedPriceRange={selectedPriceRange}
                 onSearchChange={setSearchQuery}
-                onCategoryChange={setSelectedCategory}
+                onCategoryChange={() => {}} // Disabled for paintings page
                 onArtistChange={setSelectedArtist}
                 onPriceRangeChange={setSelectedPriceRange}
                 onClearFilters={handleClearFilters}
+                hideCategoryFilter={true}
               />
             </div>
 
             <div className="mb-6">
               <p className="text-slate-600">
-                Showing {filteredProducts.length} of {products.length} artworks
+                Showing {filteredProducts.length} of {paintingProducts.length} paintings
               </p>
             </div>
 
@@ -91,7 +92,7 @@ export default function ShopPage() {
               </div>
             ) : (
               <div className="text-center py-16">
-                <h3 className="font-serif text-xl font-semibold mb-2 text-slate-800">No artworks found</h3>
+                <h3 className="font-serif text-xl font-semibold mb-2 text-slate-800">No paintings found</h3>
                 <p className="text-slate-600 mb-6">
                   Try adjusting your filters or search terms to find what you're looking for.
                 </p>

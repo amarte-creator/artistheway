@@ -155,7 +155,7 @@ export default function ContactPage() {
                           <Mail className="h-5 w-5 text-[#3e6b48] mt-0.5" />
                           <div>
                             <p className="font-medium">Email</p>
-                            <p className="text-sm text-muted-foreground">hello@artistheway.com</p>
+                            <p className="text-sm text-muted-foreground">artistheway@gmail.com</p>
                           </div>
                         </div>
 
@@ -163,7 +163,7 @@ export default function ContactPage() {
                           <MessageCircle className="h-5 w-5 text-[#6a3b83] mt-0.5" />
                           <div>
                             <p className="font-medium">WhatsApp</p>
-                            <p className="text-sm text-muted-foreground">+591 123 456 789</p>
+                            <p className="text-sm text-muted-foreground">+591 78254440</p>
                           </div>
                         </div>
 
@@ -179,7 +179,7 @@ export default function ContactPage() {
                           <Phone className="h-5 w-5 text-[#c97d60] mt-0.5" />
                           <div>
                             <p className="font-medium">Response Time</p>
-                            <p className="text-sm text-muted-foreground">Within 24 hours</p>
+                            <p className="text-sm text-muted-foreground">Within 1 hour</p>
                           </div>
                         </div>
                       </div>
@@ -196,7 +196,7 @@ export default function ContactPage() {
                       </p>
                       <Button asChild className="w-full rounded-2xl bg-[#25D366] hover:bg-[#25D366]/90 text-white">
                         <a
-                          href="https://wa.me/591123456789?text=Hello! I'm interested in learning more about Chapaco art."
+                          href="https://wa.me/59178254440?text=Hello i want to know more"
                           target="_blank"
                           rel="noopener noreferrer"
                         >

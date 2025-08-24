@@ -26,15 +26,23 @@ export async function POST(request: NextRequest) {
       case "checkout.session.completed":
         const session = event.data.object as Stripe.Checkout.Session
 
-        // Here you would typically:
+        // For digital art, we need to:
         // 1. Save the order to your database
-        // 2. Send confirmation email to customer
-        // 3. Notify artists about new orders
-        // 4. Update inventory if needed
+        // 2. Send confirmation email with download links
+        // 3. Notify artists about new sales
+        // 4. Track download analytics
 
         console.log("Payment successful for session:", session.id)
         console.log("Customer email:", session.customer_details?.email)
         console.log("Amount total:", session.amount_total)
+        console.log("Order type:", session.metadata?.order_type)
+        console.log("Product IDs:", session.metadata?.product_ids)
+
+        // In a real implementation, you would:
+        // - Save order to database
+        // - Send email with download links
+        // - Update artist earnings
+        // - Track analytics
 
         break
 

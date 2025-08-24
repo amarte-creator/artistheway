@@ -34,50 +34,37 @@ export async function POST(request: NextRequest) {
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/shop`,
-      shipping_address_collection: {
-        allowed_countries: [
-          "US",
-          "CA",
-          "GB",
-          "AU",
-          "DE",
-          "FR",
-          "ES",
-          "IT",
-          "NL",
-          "BE",
-          "AT",
-          "CH",
-          "SE",
-          "NO",
-          "DK",
-          "FI",
-        ],
-      },
-      shipping_options: [
-        {
-          shipping_rate_data: {
-            type: "fixed_amount",
-            fixed_amount: {
-              amount: 0, // Free shipping
-              currency: "usd",
-            },
-            display_name: "Free Worldwide Shipping",
-            delivery_estimate: {
-              minimum: {
-                unit: "business_day",
-                value: 7,
-              },
-              maximum: {
-                unit: "business_day",
-                value: 14,
-              },
-            },
-          },
-        },
-      ],
+      // For digital products, we don't need shipping
+      // shipping_address_collection: {
+      //   allowed_countries: [
+      //     "US", "CA", "GB", "AU", "DE", "FR", "ES", "IT", "NL", "BE", "AT", "CH", "SE", "NO", "DK", "FI",
+      //   ],
+      // },
+      // shipping_options: [
+      //   {
+      //     shipping_rate_data: {
+      //       type: "fixed_amount",
+      //       fixed_amount: {
+      //         amount: 0, // Free shipping
+      //         currency: "usd",
+      //       },
+      //       display_name: "Free Worldwide Shipping",
+      //       delivery_estimate: {
+      //         minimum: {
+      //           unit: "business_day",
+      //           value: 7,
+      //         },
+      //         maximum: {
+      //           unit: "business_day",
+      //           value: 14,
+      //         },
+      //       },
+      //     },
+      //   },
+      // ],
       metadata: {
-        order_type: "chapaco_art",
+        order_type: "digital_art",
+        product_ids: items.map((item: any) => item.id).join(','),
       },
     })
 

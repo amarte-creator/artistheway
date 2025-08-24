@@ -12,31 +12,31 @@ export function Footer() {
               <span className="font-serif text-lg font-bold">Artistheway</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Connecting the world with authentic Chapaco art from Tarija, Bolivia.
+              Connecting the world with authentic Chapaco paintings and photography from Tarija, Bolivia.
             </p>
           </div>
 
           <div>
-            <h3 className="font-serif font-semibold mb-4">Shop</h3>
+            <h3 className="font-serif font-semibold mb-4">Gallery</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/shop" className="hover:text-primary transition-colors">
-                  All Products
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=pottery" className="hover:text-primary transition-colors">
-                  Pottery
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=textiles" className="hover:text-primary transition-colors">
-                  Textiles
+                  All Artworks
                 </Link>
               </li>
               <li>
                 <Link href="/shop?category=paintings" className="hover:text-primary transition-colors">
                   Paintings
+                </Link>
+              </li>
+              <li>
+                <Link href="/shop?category=photography" className="hover:text-primary transition-colors">
+                  Photography
+                </Link>
+              </li>
+              <li>
+                <Link href="/shop?featured=true" className="hover:text-primary transition-colors">
+                  Featured Works
                 </Link>
               </li>
             </ul>
@@ -52,12 +52,12 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/artists" className="hover:text-primary transition-colors">
-                  Artists
+                  Our Artists
                 </Link>
               </li>
               <li>
-                <Link href="/culture" className="hover:text-primary transition-colors">
-                  Chapaco Culture
+                <Link href="/heritage" className="hover:text-primary transition-colors">
+                  Chapaco Heritage
                 </Link>
               </li>
             </ul>
@@ -86,7 +86,7 @@ export function Footer() {
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 Artistheway. All rights reserved. Made with love for Chapaco culture.</p>
+          <p>&copy; 2024 Artistheway. All rights reserved. Made with love for Chapaco artistic heritage.</p>
         </div>
       </div>
     </footer>

@@ -15,8 +15,8 @@ export default function AboutPage() {
             <div className="max-w-4xl mx-auto text-center space-y-8">
               <h1 className="font-serif text-4xl md:text-5xl font-bold">Our Story</h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                From the fertile valleys of Tarija, Bolivia, we bring you authentic Chapaco art that carries the soul of
-                our ancestors and the dreams of our future.
+                From the fertile valleys of Tarija, Bolivia, we bring you authentic paintings and photography that capture the soul of
+                our ancestors and the timeless beauty of Chapaco culture.
               </p>
             </div>
           </div>
@@ -29,8 +29,8 @@ export default function AboutPage() {
                 <h2 className="font-serif text-3xl md:text-4xl font-bold">The Heart of Chapaco Culture</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   In the southern valleys of Bolivia, where the earth is rich with clay and the air carries the scent of
-                  grape vines, lies Tarija—home to the proud Chapaco people. For generations, our artisans have
-                  transformed the gifts of this land into works of art that tell our stories.
+                  grape vines, lies Tarija—home to the proud Chapaco people. For generations, our artists have
+                  captured the beauty of this land through paintings and photography that tell our stories.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Each piece in our collection is more than decoration; it's a bridge between worlds, connecting you to
@@ -43,7 +43,7 @@ export default function AboutPage() {
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-serif font-bold text-[#6a3b83]">500+</div>
-                    <div className="text-sm text-muted-foreground">Artworks Created</div>
+                    <div className="text-sm text-muted-foreground">Paintings & Photos</div>
                   </div>
                 </div>
               </div>
@@ -79,7 +79,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="font-serif text-xl font-semibold">Preserve Tradition</h3>
                 <p className="text-muted-foreground">
-                  Keeping ancient Chapaco techniques alive through contemporary practice and global appreciation.
+                  Keeping ancient Chapaco artistic traditions alive through contemporary paintings and photography.
                 </p>
               </div>
 
@@ -89,7 +89,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="font-serif text-xl font-semibold">Empower Artists</h3>
                 <p className="text-muted-foreground">
-                  Providing fair compensation and global exposure for talented Chapaco artisans and their families.
+                  Providing fair compensation and global exposure for talented Chapaco painters and photographers.
                 </p>
               </div>
 
@@ -156,11 +156,11 @@ export default function AboutPage() {
               <h2 className="font-serif text-3xl md:text-4xl font-bold">The Artistheway Promise</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                 <div className="space-y-3">
-                  <h3 className="font-serif text-lg font-semibold">Authentic Origins</h3>
-                  <p className="text-muted-foreground">
-                    Every piece is created by verified Chapaco artists using traditional methods passed down through
-                    generations.
-                  </p>
+                                  <h3 className="font-serif text-lg font-semibold">Authentic Origins</h3>
+                <p className="text-muted-foreground">
+                  Every painting and photograph is created by verified Chapaco artists using traditional techniques and
+                  contemporary vision.
+                </p>
                 </div>
                 <div className="space-y-3">
                   <h3 className="font-serif text-lg font-semibold">Fair Trade</h3>

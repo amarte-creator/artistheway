@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { createContext, useContext, useReducer, useEffect } from "react"
+import { createContext, useContext, useReducer, useEffect, useCallback } from "react"
 import type { CartItem, CartState } from "@/lib/cart"
 import { calculateCartTotal, calculateItemCount } from "@/lib/cart"
 
@@ -106,25 +106,25 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("artistheway-cart", JSON.stringify(state.items))
   }, [state.items])
 
-  const addItem = (item: Omit<CartItem, "quantity">) => {
+  const addItem = useCallback((item: Omit<CartItem, "quantity">) => {
     dispatch({ type: "ADD_ITEM", payload: item })
-  }
+  }, [])
 
-  const removeItem = (id: string) => {
+  const removeItem = useCallback((id: string) => {
     dispatch({ type: "REMOVE_ITEM", payload: id })
-  }
+  }, [])
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = useCallback((id: string, quantity: number) => {
     if (quantity <= 0) {
       removeItem(id)
     } else {
       dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } })
     }
-  }
+  }, [removeItem])
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     dispatch({ type: "CLEAR_CART" })
-  }
+  }, [])
 
   return (
     <CartContext.Provider

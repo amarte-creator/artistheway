@@ -64,7 +64,7 @@ export function CartSheet() {
           )}
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-full sm:max-w-lg">
+      <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
         <SheetHeader>
           <SheetTitle className="font-serif">Shopping Cart ({itemCount})</SheetTitle>
         </SheetHeader>
@@ -82,7 +82,7 @@ export function CartSheet() {
             </div>
           ) : (
             <>
-              <div className="flex-1 overflow-auto py-6">
+              <div className="flex-1 overflow-auto py-4 md:py-6">
                 <div className="space-y-6">
                   {items.map((item) => (
                     <div key={item.id} className="flex gap-4">
@@ -138,7 +138,7 @@ export function CartSheet() {
                 </div>
               </div>
 
-              <div className="border-t pt-6 space-y-4">
+              <div className="border-t pt-4 md:pt-6 space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="font-serif text-lg font-semibold">Total</span>
                   <span className="font-serif text-xl font-bold text-[#3e6b48]">${total.toFixed(2)}</span>

@@ -47,7 +47,12 @@ export function ProductCard({ product }: ProductCardProps) {
               {product.name}
             </h3>
           </Link>
-          <p className="text-sm text-muted-foreground">by {product.artist}</p>
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">by {product.artist}</p>
+            <span className="text-xs px-2 py-1 bg-slate-100 text-slate-600 rounded-full capitalize">
+              {product.category}
+            </span>
+          </div>
           <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>
         </div>
         <div className="flex items-center justify-between">

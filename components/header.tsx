@@ -15,7 +15,13 @@ export function Header() {
 
         <nav className="hidden md:flex items-center space-x-6">
           <Link href="/shop" className="text-sm font-medium hover:text-primary transition-colors">
-            Shop
+            Gallery
+          </Link>
+          <Link href="/artists" className="text-sm font-medium hover:text-primary transition-colors">
+            Our Artists
+          </Link>
+          <Link href="/heritage" className="text-sm font-medium hover:text-primary transition-colors">
+            Chapaco Heritage
           </Link>
           <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
             About

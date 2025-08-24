@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { Header } from "@/components/header"
@@ -13,13 +14,14 @@ import { useCart } from "@/contexts/cart-context"
 import Link from "next/link"
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const product = getProductById(params.id)
+  const { id } = React.use(params)
+  const product = getProductById(id)
   const { addItem } = useCart()
 
   if (!product) {
@@ -65,25 +67,12 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="space-y-4">
               <div className="aspect-square overflow-hidden rounded-2xl glass">
                 <Image
-                  src={product.images[0] || "/placeholder.svg"}
+                  src={product.image || "/placeholder.svg"}
                   alt={product.name}
                   width={600}
                   height={600}
                   className="w-full h-full object-cover"
                 />
-              </div>
-              <div className="grid grid-cols-3 gap-4">
-                {product.images.slice(1).map((image, index) => (
-                  <div key={index} className="aspect-square overflow-hidden rounded-xl glass">
-                    <Image
-                      src={image || "/placeholder.svg"}
-                      alt={`${product.name} detail ${index + 1}`}
-                      width={200}
-                      height={200}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform cursor-pointer"
-                    />
-                  </div>
-                ))}
               </div>
             </div>
 

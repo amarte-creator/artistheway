@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients for depth and texture -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="earthGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="copperGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CD853F;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D2691E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Patterns for texture -->
+    <pattern id="geometricPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1" fill="#D4AF37" opacity="0.3"/>
+      <circle cx="20" cy="20" r="0.5" fill="#FFD700" opacity="0.5"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="1200" fill="#1a1a1a"/>
+  
+  <!-- Central glow effect -->
+  <circle cx="600" cy="600" r="400" fill="url(#centerGlow)"/>
+  
+  <!-- Main geometric composition -->
+  <g transform="translate(600, 600)">
+    
+    <!-- Outer ring - representing the cosmos -->
+    <circle cx="0" cy="0" r="500" fill="none" stroke="url(#goldGradient)" stroke-width="3" opacity="0.6"/>
+    <circle cx="0" cy="0" r="480" fill="none" stroke="url(#copperGradient)" stroke-width="2" opacity="0.4"/>
+    
+    <!-- Sacred geometry flower of life pattern -->
+    <g opacity="0.8">
+      <!-- Center circle -->
+      <circle cx="0" cy="0" r="80" fill="url(#goldGradient)" opacity="0.7"/>
+      
+      <!-- Six surrounding circles forming the flower pattern -->
+      <circle cx="0" cy="-160" r="80" fill="url(#copperGradient)" opacity="0.6"/>
+      <circle cx="138.564" cy="-80" r="80" fill="url(#copperGradient)" opacity="0.6"/>
+      <circle cx="138.564" cy="80" r="80" fill="url(#copperGradient)" opacity="0.6"/>
+      <circle cx="0" cy="160" r="80" fill="url(#copperGradient)" opacity="0.6"/>
+      <circle cx="-138.564" cy="80" r="80" fill="url(#copperGradient)" opacity="0.6"/>
+      <circle cx="-138.564" cy="-80" r="80" fill="url(#copperGradient)" opacity="0.6"/>
+      
+      <!-- Second layer of circles -->
+      <circle cx="0" cy="-320" r="80" fill="url(#earthGradient)" opacity="0.5"/>
+      <circle cx="277.128" cy="-160" r="80" fill="url(#earthGradient)" opacity="0.5"/>
+      <circle cx="277.128" cy="160" r="80" fill="url(#earthGradient)" opacity="0.5"/>
+      <circle cx="0" cy="320" r="80" fill="url(#earthGradient)" opacity="0.5"/>
+      <circle cx="-277.128" cy="160" r="80" fill="url(#earthGradient)" opacity="0.5"/>
+      <circle cx="-277.128" cy="-160" r="80" fill="url(#earthGradient)" opacity="0.5"/>
+    </g>
+    
+    <!-- Connecting lines forming sacred geometry -->
+    <g stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.7">
+      <!-- Inner hexagon -->
+      <path d="M 0 -160 L 138.564 -80 L 138.564 80 L 0 160 L -138.564 80 L -138.564 -80 Z"/>
+      
+      <!-- Outer connections -->
+      <line x1="0" y1="-160" x2="0" y2="-320"/>
+      <line x1="138.564" y1="-80" x2="277.128" y2="-160"/>
+      <line x1="138.564" y1="80" x2="277.128" y2="160"/>
+      <line x1="0" y1="160" x2="0" y2="320"/>
+      <line x1="-138.564" y1="80" x2="-277.128" y2="160"/>
+      <line x1="-138.564" y1="-80" x2="-277.128" y2="-160"/>
+    </g>
+    
+    <!-- Central mandala pattern -->
+    <g opacity="0.9">
+      <!-- Eight-pointed star -->
+      <path d="M 0 -120 L 30 -30 L 120 0 L 30 30 L 0 120 L -30 30 L -120 0 L -30 -30 Z" 
+            fill="url(#goldGradient)" opacity="0.8"/>
+      
+      <!-- Inner diamond -->
+      <path d="M 0 -60 L 60 0 L 0 60 L -60 0 Z" 
+            fill="url(#copperGradient)" opacity="0.7"/>
+      
+      <!-- Center circle -->
+      <circle cx="0" cy="0" r="20" fill="url(#goldGradient)" opacity="0.9"/>
+    </g>
+    
+    <!-- Decorative elements inspired by Chapaco culture -->
+    <g opacity="0.6">
+      <!-- Geometric border patterns -->
+      <g transform="rotate(0)">
+        <rect x="-600" y="-600" width="1200" height="1200" fill="url(#geometricPattern)" opacity="0.1"/>
+      </g>
+      
+      <!-- Corner decorative elements -->
+      <g transform="translate(-500, -500)">
+        <path d="M 0 0 L 40 0 L 20 20 Z" fill="url(#goldGradient)" opacity="0.5"/>
+        <path d="M 0 0 L 0 40 L 20 20 Z" fill="url(#copperGradient)" opacity="0.5"/>
+      </g>
+      
+      <g transform="translate(500, -500)">
+        <path d="M 0 0 L -40 0 L -20 20 Z" fill="url(#goldGradient)" opacity="0.5"/>
+        <path d="M 0 0 L 0 40 L -20 20 Z" fill="url(#copperGradient)" opacity="0.5"/>
+      </g>
+      
+      <g transform="translate(-500, 500)">
+        <path d="M 0 0 L 40 0 L 20 -20 Z" fill="url(#goldGradient)" opacity="0.5"/>
+        <path d="M 0 0 L 0 -40 L 20 -20 Z" fill="url(#copperGradient)" opacity="0.5"/>
+      </g>
+      
+      <g transform="translate(500, 500)">
+        <path d="M 0 0 L -40 0 L -20 -20 Z" fill="url(#goldGradient)" opacity="0.5"/>
+        <path d="M 0 0 L 0 -40 L -20 -20 Z" fill="url(#copperGradient)" opacity="0.5"/>
+      </g>
+    </g>
+    
+    <!-- Floating geometric elements -->
+    <g opacity="0.4">
+      <!-- Triangles -->
+      <path d="M -200 -200 L -150 -150 L -200 -100 Z" fill="url(#copperGradient)"/>
+      <path d="M 200 -200 L 150 -150 L 200 -100 Z" fill="url(#copperGradient)"/>
+      <path d="M -200 200 L -150 150 L -200 100 Z" fill="url(#copperGradient)"/>
+      <path d="M 200 200 L 150 150 L 200 100 Z" fill="url(#copperGradient)"/>
+      
+      <!-- Squares -->
+      <rect x="-250" y="-50" width="40" height="40" fill="url(#goldGradient)" opacity="0.6"/>
+      <rect x="210" y="-50" width="40" height="40" fill="url(#goldGradient)" opacity="0.6"/>
+      <rect x="-250" y="10" width="40" height="40" fill="url(#goldGradient)" opacity="0.6"/>
+      <rect x="210" y="10" width="40" height="40" fill="url(#goldGradient)" opacity="0.6"/>
+    </g>
+    
+    <!-- Energy lines radiating from center -->
+    <g stroke="url(#goldGradient)" stroke-width="1" opacity="0.3">
+      <line x1="0" y1="0" x2="0" y2="-400"/>
+      <line x1="0" y1="0" x2="0" y2="400"/>
+      <line x1="0" y1="0" x2="400" y2="0"/>
+      <line x1="0" y1="0" x2="-400" y2="0"/>
+      <line x1="0" y1="0" x2="283" y2="-283"/>
+      <line x1="0" y1="0" x2="283" y2="283"/>
+      <line x1="0" y1="0" x2="-283" y2="283"/>
+      <line x1="0" y1="0" x2="-283" y2="-283"/>
+    </g>
+  </g>
+  
+  <!-- Subtle texture overlay -->
+  <rect width="1200" height="1200" fill="url(#geometricPattern)" opacity="0.05"/>
+</svg>

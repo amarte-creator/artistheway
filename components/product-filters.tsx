@@ -16,6 +16,7 @@ interface ProductFiltersProps {
   onArtistChange: (artist: string) => void
   onPriceRangeChange: (range: string) => void
   onClearFilters: () => void
+  hideCategoryFilter?: boolean
 }
 
 export function ProductFilters({
@@ -28,6 +29,7 @@ export function ProductFilters({
   onArtistChange,
   onPriceRangeChange,
   onClearFilters,
+  hideCategoryFilter = false,
 }: ProductFiltersProps) {
   const hasActiveFilters =
     selectedCategory !== "all" || selectedArtist !== "all" || selectedPriceRange !== "all" || searchQuery !== ""
@@ -44,19 +46,21 @@ export function ProductFilters({
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Select value={selectedCategory} onValueChange={onCategoryChange}>
-          <SelectTrigger className="rounded-xl">
-            <SelectValue placeholder="Category" />
-          </SelectTrigger>
-          <SelectContent>
-            {categories.map((category) => (
-              <SelectItem key={category.value} value={category.value}>
-                {category.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <div className={`grid grid-cols-1 md:grid-cols-${hideCategoryFilter ? '2' : '3'} gap-4`}>
+        {!hideCategoryFilter && (
+          <Select value={selectedCategory} onValueChange={onCategoryChange}>
+            <SelectTrigger className="rounded-xl">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map((category) => (
+                <SelectItem key={category.value} value={category.value}>
+                  {category.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
 
         <Select value={selectedArtist} onValueChange={onArtistChange}>
           <SelectTrigger className="rounded-xl">
