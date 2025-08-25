@@ -22,6 +22,27 @@ export const metadata: Metadata = {
   description:
     "Discover and purchase authentic Chapaco art directly from talented artists in Tarija, Bolivia. Each piece tells a story of tradition, culture, and craftsmanship.",
   generator: "v0.app",
+  icons: {
+    icon: [
+      {
+        url: "/images/artistheway-logo.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/images/artistheway-logo.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "/images/artistheway-logo.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -32,6 +53,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable} antialiased`}>
       <head>
+        <link rel="icon" href="/images/artistheway-logo.png" />
+        <link rel="apple-touch-icon" href="/images/artistheway-logo.png" />
         <Script src="https://js.stripe.com/v3/" strategy="beforeInteractive" />
       </head>
       <body>
