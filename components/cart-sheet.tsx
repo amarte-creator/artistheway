@@ -26,27 +26,62 @@ export function CartSheet() {
         body: JSON.stringify({ items }),
       })
 
-      const { sessionId, error } = await response.json()
+      const data = await response.json()
 
-      if (error) {
-        console.error("Checkout error:", error)
-        alert("Failed to create checkout session. Please try again.")
+      if (!response.ok) {
+        console.error("Checkout error:", data.error)
+        
+        // Manejo de errores más específico
+        if (data.error.includes("configuration")) {
+          alert("El sistema de pagos no está configurado correctamente. Por favor contacta al soporte.")
+        } else if (data.error.includes("too small")) {
+          alert("El monto es muy pequeño para procesar. Por favor agrega más productos.")
+        } else if (data.error.includes("Invalid item data")) {
+          alert("Hay un problema con los productos en tu carrito. Por favor recarga la página.")
+        } else {
+          alert(`Error al procesar el pago: ${data.error}`)
+        }
         return
       }
 
-      // Redirect to Stripe Checkout
-      const stripe = (window as any).Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId,
-      })
+      const { sessionId } = data
 
-      if (stripeError) {
-        console.error("Stripe redirect error:", stripeError)
-        alert("Failed to redirect to checkout. Please try again.")
+      if (!sessionId) {
+        alert("No se pudo crear la sesión de pago. Por favor intenta de nuevo.")
+        return
+      }
+
+      // Verificar que Stripe esté cargado
+      if (typeof window !== 'undefined' && (window as any).Stripe) {
+        const stripe = (window as any).Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+        
+        if (!stripe) {
+          alert("Error al cargar el sistema de pagos. Por favor recarga la página.")
+          return
+        }
+
+        const { error: stripeError } = await stripe.redirectToCheckout({
+          sessionId,
+        })
+
+        if (stripeError) {
+          console.error("Stripe redirect error:", stripeError)
+          
+          // Manejo de errores específicos de Stripe
+          if (stripeError.type === 'card_error') {
+            alert("Error con la tarjeta: " + stripeError.message)
+          } else if (stripeError.type === 'validation_error') {
+            alert("Error de validación: " + stripeError.message)
+          } else {
+            alert("Error al procesar el pago: " + stripeError.message)
+          }
+        }
+      } else {
+        alert("El sistema de pagos no está disponible. Por favor recarga la página.")
       }
     } catch (error) {
       console.error("Checkout error:", error)
-      alert("Something went wrong. Please try again.")
+      alert("Ocurrió un error inesperado. Por favor intenta de nuevo.")
     } finally {
       setIsCheckingOut(false)
     }

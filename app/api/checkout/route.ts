@@ -9,8 +9,32 @@ export async function POST(request: NextRequest) {
   try {
     const { items } = await request.json()
 
+    // Validaciones mejoradas
     if (!items || items.length === 0) {
       return NextResponse.json({ error: "No items provided" }, { status: 400 })
+    }
+
+    // Validar que todos los items tengan los campos requeridos
+    for (const item of items) {
+      if (!item.id || !item.name || !item.price || !item.quantity) {
+        return NextResponse.json({ 
+          error: "Invalid item data. Missing required fields." 
+        }, { status: 400 })
+      }
+      
+      if (item.price <= 0 || item.quantity <= 0) {
+        return NextResponse.json({ 
+          error: "Invalid price or quantity. Must be greater than 0." 
+        }, { status: 400 })
+      }
+    }
+
+    // Verificar que las claves de Stripe estén configuradas
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error("STRIPE_SECRET_KEY not configured")
+      return NextResponse.json({ 
+        error: "Payment system not configured" 
+      }, { status: 500 })
     }
 
     // Create line items for Stripe
@@ -34,43 +58,47 @@ export async function POST(request: NextRequest) {
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/shop`,
-      // For digital products, we don't need shipping
-      // shipping_address_collection: {
-      //   allowed_countries: [
-      //     "US", "CA", "GB", "AU", "DE", "FR", "ES", "IT", "NL", "BE", "AT", "CH", "SE", "NO", "DK", "FI",
-      //   ],
-      // },
-      // shipping_options: [
-      //   {
-      //     shipping_rate_data: {
-      //       type: "fixed_amount",
-      //       fixed_amount: {
-      //         amount: 0, // Free shipping
-      //         currency: "usd",
-      //       },
-      //       display_name: "Free Worldwide Shipping",
-      //       delivery_estimate: {
-      //         minimum: {
-      //           unit: "business_day",
-      //           value: 7,
-      //         },
-      //         maximum: {
-      //           unit: "business_day",
-      //           value: 14,
-      //         },
-      //       },
-      //     },
-      //   },
-      // ],
+      // Configuración para productos digitales
+      payment_intent_data: {
+        metadata: {
+          order_type: "digital_art",
+          product_ids: items.map((item: any) => item.id).join(','),
+        },
+      },
       metadata: {
         order_type: "digital_art",
         product_ids: items.map((item: any) => item.id).join(','),
+        total_amount: items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0).toString(),
+      },
+      // Configuración de facturación automática para productos digitales
+      billing_address_collection: "auto",
+      // Configuración de impuestos (opcional)
+      automatic_tax: {
+        enabled: false, // Cambiar a true si quieres calcular impuestos automáticamente
       },
     })
 
     return NextResponse.json({ sessionId: session.id })
   } catch (error) {
     console.error("Stripe checkout error:", error)
-    return NextResponse.json({ error: "Failed to create checkout session" }, { status: 500 })
+    
+    // Manejo de errores más específico
+    if (error instanceof Error) {
+      if (error.message.includes("Invalid API Key")) {
+        return NextResponse.json({ 
+          error: "Payment system configuration error" 
+        }, { status: 500 })
+      }
+      
+      if (error.message.includes("amount_too_small")) {
+        return NextResponse.json({ 
+          error: "Amount too small for processing" 
+        }, { status: 400 })
+      }
+    }
+    
+    return NextResponse.json({ 
+      error: "Failed to create checkout session. Please try again." 
+    }, { status: 500 })
   }
 }
