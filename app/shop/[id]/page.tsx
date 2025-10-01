@@ -8,8 +8,8 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { ArrowLeft, Heart, Share2 } from "lucide-react"
-import { getProductById } from "@/lib/products"
+import { ArrowLeft, Heart, Share2, AlertCircle } from "lucide-react"
+import { getProductById, products } from "@/lib/products"
 import { useCart } from "@/contexts/cart-context"
 import Link from "next/link"
 
@@ -125,17 +125,77 @@ export default function ProductPage({ params }: ProductPageProps) {
               </div>
 
               <div className="space-y-4">
+                {/* Urgency messaging */}
+                {product.stockCount && product.stockCount <= 3 && (
+                  <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                    <div className="flex items-center space-x-2 text-red-700">
+                      <AlertCircle className="h-5 w-5" />
+                      <span className="font-semibold">
+                        {product.stockCount === 1 
+                          ? "Last one available!" 
+                          : `Only ${product.stockCount} left in stock!`
+                        }
+                      </span>
+                    </div>
+                    <p className="text-sm text-red-600 mt-1">
+                      This piece is in high demand. Secure yours now before it's gone.
+                    </p>
+                  </div>
+                )}
+
+                {/* Pricing with discount */}
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="font-serif text-2xl font-bold text-[#3e6b48]">${product.price}</span>
+                        {product.originalPrice && (
+                          <>
+                            <span className="text-lg text-slate-500 line-through">${product.originalPrice}</span>
+                            <Badge className="bg-green-500 text-white border-0">
+                              Save ${product.originalPrice - product.price}
+                            </Badge>
+                          </>
+                        )}
+                      </div>
+                      <p className="text-sm text-green-700 font-medium">
+                        {product.originalPrice ? "Limited Time Offer" : "Special Price"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <Button
                   size="lg"
-                  className="w-full rounded-2xl bg-[#3e6b48] hover:bg-[#3e6b48]/90 text-lg py-6"
+                  className="w-full rounded-2xl bg-[#3e6b48] hover:bg-[#3e6b48]/90 text-lg py-6 font-semibold"
                   disabled={product.availability === "sold-out"}
                   onClick={handleAddToCart}
                 >
-                  {product.availability === "sold-out" ? "Sold Out" : "Add to Cart"}
+                  {product.availability === "sold-out" 
+                    ? "Sold Out" 
+                    : product.stockCount === 1 
+                      ? "Secure This Last Piece" 
+                      : "Add to My Collection"
+                  }
                 </Button>
-                <p className="text-sm text-muted-foreground text-center">
-                  Free shipping worldwide. Handcrafted with love in Tarija, Bolivia.
-                </p>
+
+                {/* Trust indicators */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-center space-x-6 text-sm text-slate-600">
+                    <div className="flex items-center space-x-1">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>Free worldwide shipping</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span>30-day guarantee</span>
+                    </div>
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground text-center">
+                    Handcrafted with love in Tarija, Bolivia. Supporting local Chapaco artists.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -143,9 +203,55 @@ export default function ProductPage({ params }: ProductPageProps) {
           <section className="mt-16 pt-16 border-t">
             <h2 className="font-serif text-2xl font-bold mb-8 text-center">You Might Also Like</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* This would show related products - for now showing placeholder */}
-              <div className="text-center text-muted-foreground py-8">Related products coming soon...</div>
+              {products
+                .filter(p => p.id !== product.id && (p.artist === product.artist || p.category === product.category))
+                .slice(0, 3)
+                .map((relatedProduct) => (
+                  <div key={relatedProduct.id} className="group">
+                    <Link href={`/shop/${relatedProduct.id}`}>
+                      <div className="aspect-square overflow-hidden rounded-xl mb-4">
+                        <Image
+                          src={relatedProduct.image || "/placeholder.svg"}
+                          alt={relatedProduct.name}
+                          width={300}
+                          height={300}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                    </Link>
+                    <div className="space-y-2">
+                      <Link href={`/shop/${relatedProduct.id}`}>
+                        <h3 className="font-serif text-lg font-semibold hover:text-primary transition-colors">
+                          {relatedProduct.name}
+                        </h3>
+                      </Link>
+                      <p className="text-sm text-muted-foreground">by {relatedProduct.artist}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="font-serif text-lg font-bold text-[#3e6b48]">
+                          ${relatedProduct.price}
+                          {relatedProduct.originalPrice && (
+                            <span className="text-sm text-slate-500 line-through ml-2">
+                              ${relatedProduct.originalPrice}
+                            </span>
+                          )}
+                        </span>
+                        <Button size="sm" className="rounded-xl">
+                          View Details
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
+            
+            {products.filter(p => p.id !== product.id && (p.artist === product.artist || p.category === product.category)).length === 0 && (
+              <div className="text-center text-muted-foreground py-8">
+                <p>More artworks from our collection coming soon...</p>
+                <Button asChild className="mt-4 rounded-xl">
+                  <Link href="/shop">Browse All Artworks</Link>
+                </Button>
+              </div>
+            )}
           </section>
         </div>
       </main>

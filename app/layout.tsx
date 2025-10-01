@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Playfair_Display, Inter } from "next/font/google"
 import { CartProvider } from "@/contexts/cart-context"
+import { ExitIntentProvider } from "@/components/exit-intent-provider"
 import Script from "next/script"
 import "./globals.css"
 
@@ -58,7 +59,11 @@ export default function RootLayout({
         <Script src="https://js.stripe.com/v3/" strategy="beforeInteractive" />
       </head>
       <body>
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+          <ExitIntentProvider>
+            {children}
+          </ExitIntentProvider>
+        </CartProvider>
       </body>
     </html>
   )

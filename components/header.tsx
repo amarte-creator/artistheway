@@ -32,6 +32,14 @@ export function Header() {
         </nav>
 
         <div className="flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-2 text-xs text-slate-600">
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <span key={i} className="text-yellow-400">★</span>
+              ))}
+            </div>
+            <span>4.9/5</span>
+          </div>
           <CartSheet />
           <Button variant="ghost" size="icon" className="md:hidden">
             <Menu className="h-5 w-5" />

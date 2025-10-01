@@ -7,6 +7,9 @@ export interface Product {
   artist: string
   description: string
   featured: boolean
+  stockCount?: number
+  isLimited?: boolean
+  originalPrice?: number
 }
 
 export interface ProductDetail extends Product {
@@ -21,28 +24,32 @@ export const products: Product[] = [
   {
     id: "1",
     name: "Tarija Valley Sunset",
-    price: 50,
+    price: 45,
+    originalPrice: 65,
     image: "/andean-sunset-oil.png",
     category: "paintings",
     artist: "Ana Rodriguez",
     description:
       "Oil painting capturing the golden hour over the Andean peaks surrounding Tarija, with rich textures and vibrant colors.",
     featured: true,
+    stockCount: 3,
+    isLimited: true,
   },
   {
     id: "2",
     name: "Vineyard Harvest Morning",
-    price: 70,
+    price: 35,
     image: "/vineyard-runner.png",
     category: "photography",
     artist: "Carlos Mendoza",
     description: "Stunning photograph of the morning light filtering through grapevines during harvest season in Tarija.",
     featured: true,
+    stockCount: 8,
   },
   {
     id: "3",
     name: "Valley Flowers in Bloom",
-    price: 100,
+    price: 85,
     image: "/valley-flowers-painting.png",
     category: "paintings",
     artist: "Ana Rodriguez",
@@ -52,7 +59,7 @@ export const products: Product[] = [
   {
     id: "4",
     name: "Chapaco Village Life",
-    price: 100,
+    price: 40,
     image: "/tarija-artisans.png",
     category: "photography",
     artist: "María Gonzalez",
@@ -62,17 +69,20 @@ export const products: Product[] = [
   {
     id: "5",
     name: "Mountain Spirit Landscape",
-    price: 100,
+    price: 195,
+    originalPrice: 250,
     image: "/mountain-spirit-sculpture.png",
     category: "paintings",
     artist: "Roberto Silva",
     description: "Large acrylic painting depicting the mystical mountains and spirits of the Andes in bold, contemporary style.",
     featured: false,
+    stockCount: 1,
+    isLimited: true,
   },
   {
     id: "6",
     name: "Condor Flight Over Tarija",
-    price: 100,
+    price: 125,
     image: "/condor-flight-painting.png",
     category: "paintings",
     artist: "Ana Rodriguez",
@@ -82,7 +92,7 @@ export const products: Product[] = [
   {
     id: "7",
     name: "Artisan Portrait Series",
-    price: 100,
+    price: 55,
     image: "/bolivian-ceramic-artist.png",
     category: "photography",
     artist: "Carlos Mendoza",
@@ -92,7 +102,7 @@ export const products: Product[] = [
   {
     id: "8",
     name: "Sacred Geometry Abstract",
-    price: 100,
+    price: 165,
     image: "/sacred-geometry-abstract.png",
     category: "paintings",
     artist: "José Vargas",
@@ -102,7 +112,7 @@ export const products: Product[] = [
   {
     id: "9",
     name: "Weaver's Hands at Work",
-    price: 100,
+    price: 45,
     image: "/bolivian-weaver-portrait.png",
     category: "photography",
     artist: "María Gonzalez",
@@ -112,7 +122,7 @@ export const products: Product[] = [
   {
     id: "10",
     name: "Valley Mist at Dawn",
-    price: 100,
+    price: 95,
     image: "/bolivian-ceramic-vase.png",
     category: "paintings",
     artist: "Ana Rodriguez",
@@ -122,7 +132,7 @@ export const products: Product[] = [
   {
     id: "11",
     name: "Traditional Wedding Ceremony",
-    price: 100,
+    price: 50,
     image: "/chapaco-wedding-blanket.png",
     category: "photography",
     artist: "Carlos Mendoza",
@@ -132,7 +142,7 @@ export const products: Product[] = [
   {
     id: "12",
     name: "Ancestral Memory",
-    price: 100,
+    price: 145,
     image: "/ancestral-mask.png",
     category: "paintings",
     artist: "Diego Fernandez",
@@ -285,9 +295,10 @@ export const artists = [
 export const priceRanges = [
   { value: "all", label: "All Prices" },
   { value: "0-50", label: "Under $50" },
-  { value: "50-75", label: "$50 - $75" },
-  { value: "75-100", label: "$75 - $100" },
-  { value: "100", label: "$100" },
+  { value: "50-100", label: "$50 - $100" },
+  { value: "100-150", label: "$100 - $150" },
+  { value: "150-200", label: "$150 - $200" },
+  { value: "200", label: "$200+" },
 ]
 
 export function getProductById(id: string): ProductDetail | undefined {

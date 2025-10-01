@@ -1,7 +1,9 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
+import { Testimonials } from "@/components/testimonials"
 import { Button } from "@/components/ui/button"
+import { LavaLamp } from "@/components/ui/fluid-blob"
 import { featuredProducts } from "@/lib/products"
 import Link from "next/link"
 
@@ -63,8 +65,12 @@ export default function HomePage() {
         </section>
 
         {/* Featured Artworks Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-slate-100">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          {/* Fluid Blob Background */}
+          <div className="absolute inset-0 opacity-20">
+            <LavaLamp />
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
             <div className="text-center space-y-4 mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-800">Featured Artworks</h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -85,8 +91,12 @@ export default function HomePage() {
         </section>
 
         {/* Art Categories Section */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          {/* Fluid Blob Background */}
+          <div className="absolute inset-0 opacity-15">
+            <LavaLamp />
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
             <div className="text-center space-y-4 mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-800">Explore Our Collections</h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -140,8 +150,12 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          {/* Fluid Blob Background */}
+          <div className="absolute inset-0 opacity-10">
+            <LavaLamp />
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-800">Preserving Chapaco Heritage Through Art</h2>
@@ -171,9 +185,16 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Testimonials Section */}
+        <Testimonials />
+
         {/* Artists Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-slate-100">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          {/* Fluid Blob Background */}
+          <div className="absolute inset-0 opacity-12">
+            <LavaLamp />
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
             <div className="text-center space-y-4 mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-800">Meet Our Artists</h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
